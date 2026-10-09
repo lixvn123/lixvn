@@ -67,6 +67,17 @@ def test_vercel_json_validity():
     assert isinstance(data["headers"], list)
     assert len(data["headers"]) > 0
 
+def test_master_action_plan_completeness():
+    path = os.path.join(KIT_DIR, "MASTER_ACTION_PLAN.md")
+    assert os.path.isfile(path), "MASTER_ACTION_PLAN.md must exist"
+    with open(path, "r", encoding="utf-8") as f:
+        content = f.read()
+    assert "Tahap 1" in content
+    assert "Tahap 2" in content
+    assert "Tahap 3" in content
+    assert "Tahap 4" in content
+    assert "configure.py" in content
+
 def test_readme_and_license():
     readme_path = os.path.join(KIT_DIR, "README.md")
     license_path = os.path.join(KIT_DIR, "LICENSE")
