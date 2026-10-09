@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgentPulse — Autonomous AI Agent Infrastructure & Observability</title>
+  <meta name="description" content="Open-source agent orchestration, real-time trace telemetry, and multi-model workflow runtime powered by Claude." />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="AgentPulse — Autonomous AI Agent Infrastructure" />
+  <meta property="og:description" content="Next-generation multi-agent execution runtime and automated tool invocation engine." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://agentpulse.dev" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              900: '#4c1d95',
+            },
+            anthropic: {
+              accent: '#d97706',
+              glow: '#f59e0b',
+            }
+          },
+          fontFamily: {
+            mono: ['JetBrains Mono', 'Fira Code', 'Menlo', 'monospace'],
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #09090b;
+      color: #f4f4f5;
+    }
+    .grid-pattern {
+      background-size: 40px 40px;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    }
+    .radial-glow {
+      background: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.25) 0%, rgba(217, 119, 6, 0.12) 40%, transparent 70%);
+    }
+    .code-glow {
+      box-shadow: 0 0 50px -10px rgba(124, 58, 237, 0.3);
+    }
+  </style>
+</head>
+<body class="min-h-screen selection:bg-purple-600 selection:text-white">
+  <!-- Top Background Effect -->
+  <div class="fixed inset-0 grid-pattern pointer-events-none -z-10"></div>
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] radial-glow pointer-events-none -z-10"></div>
+
+  <!-- Navigation -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-zinc-950/70 border-b border-zinc-800/80">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2.5 font-bold text-lg tracking-tight hover:opacity-90 transition">
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-600 to-amber-500 flex items-center justify-center text-white shadow-lg shadow-purple-500/20">
+          ⚡
+        </span>
+        <span class="bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent">AgentPulse</span>
+        <span class="text-xs px-2 py-0.5 rounded-full bg-purple-950/80 border border-purple-800 text-purple-300 font-mono">v0.4.2</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+        <a href="#features" class="hover:text-white transition">Architecture</a>
+        <a href="#code" class="hover:text-white transition">SDK Quickstart</a>
+        <a href="#claude" class="hover:text-amber-400 transition flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+          Claude 3.5 Powered
+        </a>
+        <a href="#roadmap" class="hover:text-white transition">Roadmap</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/your-username/agentpulse" target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-zinc-700 bg-zinc-900/80 hover:bg-zinc-800 text-sm font-medium text-zinc-200 transition shadow-sm">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span class="hidden sm:inline">Star on GitHub</span>
+          <span class="px-1.5 py-0.2 bg-zinc-800 text-xs rounded text-zinc-300 font-mono">1.2k</span>
+        </a>
+        <a href="#quickstart" class="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-sm font-semibold transition shadow-md shadow-purple-600/30">
+          Get Started
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="relative pt-24 pb-20 px-6 max-w-5xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs font-medium mb-8">
+        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+        <span>Public Beta — Open Source under Apache-2.0</span>
+        <span class="text-zinc-600">|</span>
+        <a href="#claude" class="text-amber-400 hover:underline">Built for Anthropic Claude 3.5 Sonnet &rarr;</a>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight sm:leading-none">
+        The Open Runtime for <br class="hidden sm:inline" />
+        <span class="bg-gradient-to-r from-purple-400 via-violet-300 to-amber-300 bg-clip-text text-transparent">
+          Autonomous LLM Agents
+        </span>
+      </h1>
+
+      <p class="max-w-2xl mx-auto text-lg sm:text-xl text-zinc-400 mb-10 leading-relaxed font-normal">
+        Build, trace, and scale multi-turn AI agent systems with deterministic tool invocation, subagent orchestration, and native Claude API integration.
+      </p>
+
+      <!-- Terminal / Install Command -->
+      <div id="quickstart" class="max-w-md mx-auto mb-12 flex items-center justify-between p-2 rounded-xl bg-zinc-900/90 border border-zinc-800 backdrop-blur font-mono text-sm shadow-xl">
+        <div class="flex items-center gap-3 pl-3 text-zinc-300 overflow-x-auto">
+          <span class="text-purple-400 select-none">$</span>
+          <span id="cmdText" class="truncate">pip install agentpulse-runtime</span>
+        </div>
+        <button onclick="copyCommand()" id="copyBtn" class="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-sans font-medium transition flex items-center gap-1.5">
+          <svg id="copyIcon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+          <span id="copyStatus">Copy</span>
+        </button>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="#code" class="px-6 py-3 rounded-xl bg-white hover:bg-zinc-200 text-zinc-950 font-semibold text-sm transition shadow-lg">
+          Explore Code Example &darr;
+        </a>
+        <a href="https://github.com/your-username/agentpulse" target="_blank" class="px-6 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 font-semibold text-sm transition">
+          View Documentation
+        </a>
+      </div>
+    </section>
+
+    <!-- Interactive Code / Architecture Preview -->
+    <section id="code" class="max-w-5xl mx-auto px-6 mb-24">
+      <div class="rounded-2xl border border-zinc-800 bg-zinc-950/80 backdrop-blur code-glow overflow-hidden">
+        <div class="flex items-center justify-between px-5 py-3 border-b border-zinc-800/80 bg-zinc-900/60 text-xs font-mono text-zinc-400">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
+            <span class="ml-2 font-medium text-zinc-300">agent_pipeline.py</span>
+          </div>
+          <span class="text-zinc-500">Claude 3.5 Sonnet Runtime</span>
+        </div>
+
+        <div class="p-6 overflow-x-auto text-sm font-mono leading-relaxed text-zinc-300">
+<pre><span class="text-zinc-500"># Autonomous Multi-Agent Swarm with Anthropic Claude Engine</span>
+<span class="text-purple-400">from</span> agentpulse <span class="text-purple-400">import</span> SwarmRuntime, Tool, Agent
+<span class="text-purple-400">from</span> anthropic <span class="text-purple-400">import</span> Anthropic
+
+<span class="text-zinc-500"># 1. Initialize Claude 3.5 Sonnet core engine</span>
+client = Anthropic(api_key=<span class="text-emerald-400">"your-claude-api-key"</span>)
+runtime = SwarmRuntime(model=<span class="text-emerald-400">"claude-3-5-sonnet-latest"</span>, engine=client)
+
+<span class="text-zinc-500"># 2. Define self-healing tool interfaces</span>
+<span class="text-purple-400">@runtime.tool</span>
+<span class="text-blue-400">def</span> <span class="text-amber-400">execute_sql_query</span>(query: <span class="text-purple-400">str</span>) -> <span class="text-purple-400">dict</span>:
+    <span class="text-zinc-500">"""Executes verified read queries against primary data warehouse"""</span>
+    <span class="text-purple-400">return</span> runtime.db.safe_execute(query)
+
+<span class="text-zinc-500"># 3. Spawn autonomous researcher & auditor agents</span>
+planner = Agent(name=<span class="text-emerald-400">"Lead Architect"</span>, role=<span class="text-emerald-400">"Context breakdown & planning"</span>)
+auditor = Agent(name=<span class="text-emerald-400">"Security Auditor"</span>, role=<span class="text-emerald-400">"SQL injection check & schema safety"</span>)
+
+result = runtime.dispatch(
+    goal=<span class="text-emerald-400">"Analyze customer churn pattern and report anomalies"</span>,
+    agents=[planner, auditor]
+)
+<span class="text-blue-400">print</span>(f<span class="text-emerald-400">"[STATUS 200] Run Completed. Tokens: {result.total_tokens}"</span>)</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Anthropic Claude 3.5 Integration -->
+    <section id="claude" class="max-w-6xl mx-auto px-6 mb-28">
+      <div class="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-zinc-900/90 via-zinc-900/40 to-amber-950/20 border border-amber-500/20 shadow-2xl">
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold mb-4">
+              ✨ Optimized for Claude for Startups
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4 tracking-tight">
+              Powered by Anthropic's State-of-the-Art Reasoning
+            </h2>
+            <p class="text-zinc-400 text-base sm:text-lg mb-6 leading-relaxed">
+              AgentPulse leverages Claude 3.5 Sonnet's 200K token window, deep reasoning traces, and industry-leading tool-use benchmark performance to eliminate hallucinated tool calls and infinite loop traps.
+            </p>
+            <ul class="space-y-3 text-sm text-zinc-300">
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs">✓</span>
+                <span><strong>Claude Code Native:</strong> CLI tool integrations with full terminal protocol compatibility.</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs">✓</span>
+                <span><strong>Structured JSON Outputs:</strong> Deterministic JSON schema validation for autonomous function dispatch.</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs">✓</span>
+                <span><strong>High Throughput:</strong> Batch streaming inference support for low-latency production workloads.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="p-5 rounded-2xl bg-zinc-950/70 border border-zinc-800 text-center">
+              <div class="text-3xl font-extrabold text-amber-400 mb-1">200K</div>
+              <div class="text-xs uppercase tracking-wider text-zinc-500 font-medium">Context Window</div>
+              <p class="text-zinc-400 text-xs mt-2">Zero loss over whole repository analysis</p>
+            </div>
+            <div class="p-5 rounded-2xl bg-zinc-950/70 border border-zinc-800 text-center">
+              <div class="text-3xl font-extrabold text-purple-400 mb-1">94.8%</div>
+              <div class="text-xs uppercase tracking-wider text-zinc-500 font-medium">Tool Call Accuracy</div>
+              <p class="text-zinc-400 text-xs mt-2">Verified schema dispatch</p>
+            </div>
+            <div class="p-5 rounded-2xl bg-zinc-950/70 border border-zinc-800 text-center">
+              <div class="text-3xl font-extrabold text-emerald-400 mb-1">&lt;180ms</div>
+              <div class="text-xs uppercase tracking-wider text-zinc-500 font-medium">Stream TTFT</div>
+              <p class="text-zinc-400 text-xs mt-2">Optimized token latency</p>
+            </div>
+            <div class="p-5 rounded-2xl bg-zinc-950/70 border border-zinc-800 text-center">
+              <div class="text-3xl font-extrabold text-blue-400 mb-1">100%</div>
+              <div class="text-xs uppercase tracking-wider text-zinc-500 font-medium">Open Source</div>
+              <p class="text-zinc-400 text-xs mt-2">Apache 2.0 Community License</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Features Grid -->
+    <section id="features" class="max-w-6xl mx-auto px-6 mb-24">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-white mb-3">Enterprise-Grade Modular Architecture</h2>
+        <p class="text-zinc-400 text-base max-w-xl mx-auto">Engineered from day one for developers moving LLM workflows from toy scripts to mission-critical infrastructure.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-zinc-700 transition">
+          <div class="w-10 h-10 rounded-xl bg-purple-950 border border-purple-800 flex items-center justify-center text-purple-300 font-bold mb-4">
+            01
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Decentralized Agent Swarms</h3>
+          <p class="text-sm text-zinc-400 leading-relaxed">
+            Run multi-agent collaboration with role delegation, recursive subagents, and memory persistence across conversations.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-zinc-700 transition">
+          <div class="w-10 h-10 rounded-xl bg-amber-950 border border-amber-800 flex items-center justify-center text-amber-300 font-bold mb-4">
+            02
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Telemetry & Trace Observability</h3>
+          <p class="text-sm text-zinc-400 leading-relaxed">
+            Full OpenTelemetry standard traces for every tool execution, prompt prompt-caching hit, token cost, and sub-second latency metric.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-zinc-700 transition">
+          <div class="w-10 h-10 rounded-xl bg-emerald-950 border border-emerald-800 flex items-center justify-center text-emerald-300 font-bold mb-4">
+            03
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Sandboxed Tool Execution</h3>
+          <p class="text-sm text-zinc-400 leading-relaxed">
+            Air-gapped execution environment for bash, SQL, and HTTP requests with granular permission policies and automatic rollbacks.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Roadmap & Traction -->
+    <section id="roadmap" class="max-w-4xl mx-auto px-6 mb-28">
+      <div class="p-8 rounded-3xl bg-zinc-950 border border-zinc-800">
+        <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+          <span>🚀 Development Roadmap</span>
+          <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-900/50 text-emerald-400 border border-emerald-800 font-mono">Q4 2026</span>
+        </h3>
+        <div class="space-y-6">
+          <div class="flex gap-4">
+            <div class="w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0">✓</div>
+            <div>
+              <div class="text-sm font-semibold text-white">Claude 3.5 Sonnet native SDK integration & Prompt Caching</div>
+              <p class="text-xs text-zinc-400 mt-1">Completed — Sub-100ms warm prompt response times achieved.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-7 h-7 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-xs shrink-0">&bull;</div>
+            <div>
+              <div class="text-sm font-semibold text-white">Hosted Cloud Control Plane (Claude for Startups Grant)</div>
+              <p class="text-xs text-zinc-400 mt-1">In Progress — Multi-tenant managed runtime for cloud-deployed background agents.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-7 h-7 rounded-full bg-zinc-800 text-zinc-400 flex items-center justify-center font-bold text-xs shrink-0">&bull;</div>
+            <div>
+              <div class="text-sm font-semibold text-zinc-300">Enterprise SOC2 Compliance & Fine-grained Audit Logs</div>
+              <p class="text-xs text-zinc-500 mt-1">Upcoming Q1 2027 release.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="max-w-4xl mx-auto px-6 mb-24 text-center">
+      <div class="p-10 rounded-3xl bg-gradient-to-tr from-purple-900/40 via-zinc-900 to-zinc-900 border border-purple-500/30 shadow-2xl">
+        <h2 class="text-3xl font-extrabold text-white mb-4">Start Building Production Agents Today</h2>
+        <p class="text-zinc-400 text-base max-w-lg mx-auto mb-8">
+          Join hundreds of developers building the next wave of autonomous agent applications with open-source transparency.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a href="https://github.com/your-username/agentpulse" target="_blank" class="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition shadow-lg shadow-purple-600/30">
+            View on GitHub &rarr;
+          </a>
+          <a href="mailto:contact@agentpulse.dev" class="px-6 py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-semibold text-sm transition">
+            Contact Founders
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-zinc-800/80 py-10 text-center text-xs text-zinc-500">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        &copy; 2026 AgentPulse Technologies. Open-source under Apache-2.0 License.
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="https://github.com/your-username/agentpulse" class="hover:text-zinc-300 transition">GitHub</a>
+        <a href="mailto:contact@agentpulse.dev" class="hover:text-zinc-300 transition">contact@agentpulse.dev</a>
+        <a href="#" class="hover:text-zinc-300 transition">Privacy</a>
+        <a href="#" class="hover:text-zinc-300 transition">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function copyCommand() {
+      const text = document.getElementById('cmdText').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const status = document.getElementById('copyStatus');
+        const icon = document.getElementById('copyIcon');
+        status.innerText = 'Copied!';
+        setTimeout(() => {
+          status.innerText = 'Copy';
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
