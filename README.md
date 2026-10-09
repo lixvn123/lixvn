@@ -31,11 +31,11 @@ Lixvn provides modular execution infrastructure for production AI agents. Design
 ## 🚀 Quickstart
 
 ```bash
-pip install agentpulse-runtime anthropic
+pip install lixvn anthropic
 ```
 
 ```python
-from agentpulse import SwarmRuntime, Agent
+from lixvn import SwarmRuntime, Agent
 from anthropic import Anthropic
 
 client = Anthropic(api_key="your-api-key")
