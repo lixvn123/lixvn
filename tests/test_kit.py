@@ -78,6 +78,15 @@ def test_master_action_plan_completeness():
     assert "Tahap 4" in content
     assert "configure.py" in content
 
+def test_domain_purchase_guide_completeness():
+    path = os.path.join(KIT_DIR, "DOMAIN_PURCHASE_GUIDE.md")
+    assert os.path.isfile(path), "DOMAIN_PURCHASE_GUIDE.md must exist"
+    with open(path, "r", encoding="utf-8") as f:
+        content = f.read()
+    assert "Cloudflare Registrar" in content
+    assert "Email Routing" in content
+    assert "Porkbun" in content
+
 def test_readme_and_license():
     readme_path = os.path.join(KIT_DIR, "README.md")
     license_path = os.path.join(KIT_DIR, "LICENSE")
