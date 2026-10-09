@@ -27,7 +27,7 @@ def test_index_html_structure():
     
     # Claude & AI positioning
     assert "Claude" in content
-    assert "AgentPulse" in content
+    assert ("AgentPulse" in content or "Lixvn" in content)
     assert "Anthropic" in content
 
 def test_application_pitch_completeness():
@@ -96,6 +96,6 @@ def test_readme_and_license():
     
     with open(readme_path, "r", encoding="utf-8") as f:
         readme = f.read()
-    assert "AgentPulse" in readme
+    assert ("AgentPulse" in readme or "Lixvn" in readme)
     assert "Apache-2.0" in readme
     assert "Quickstart" in readme

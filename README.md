@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⚡ AgentPulse
+# ⚡ Lixvn
 
 **The Open Runtime for Autonomous LLM Agents & Multi-Agent Swarms**
 
@@ -11,7 +11,7 @@
 
 *Deterministic tool invocation, structured agent delegation, and end-to-end trace observability powered by Claude Console APIs.*
 
-[Landing Page](https://agentpulse.dev) • [Documentation](#quickstart) • [Claude Integration](#anthropic-claude-integration) • [Architecture](#architecture)
+[Landing Page](https://lixvn.dev) • [Documentation](#quickstart) • [Claude Integration](#anthropic-claude-integration) • [Architecture](#architecture)
 
 </div>
 
@@ -19,7 +19,7 @@
 
 ## 🌟 Overview
 
-AgentPulse provides modular execution infrastructure for production AI agents. Designed specifically to run on Anthropic's state-of-the-art Claude 3.5 Sonnet and Haiku models, AgentPulse solves core challenges in agent deployment:
+Lixvn provides modular execution infrastructure for production AI agents. Designed specifically to run on Anthropic's state-of-the-art Claude 3.5 Sonnet and Haiku models, Lixvn solves core challenges in agent deployment:
 
 - **200K Context Trajectory Management**: Automatically compacts and prunes agent scratchpads while retaining long-context fidelity.
 - **Deterministic Tool Calling**: Validates arguments against Pydantic schemas before invocation, preventing runtime errors.
