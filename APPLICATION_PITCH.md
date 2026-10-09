@@ -26,7 +26,7 @@ Anthropic mensyaratkan deskripsi singkat 2 kalimat yang menjelaskan **apa yang d
 | **Startup / Project Name** | Nama proyek / repo Anda | `Lixvn` (atau nama repo GitHub Anda) |
 | **Website URL** | Domain kustom dengan https:// | `https://lixvn.dev` (atau domain Anda) |
 | **Work Email** | Email dengan domain yang sama (**wajib**) | `contact@lixvn.dev` / `founder@yourproject.dev` |
-| **GitHub Repo Link** | Link repo publik aktif Anda | `https://github.com/felixvalentino/lixvn` |
+| **GitHub Repo Link** | Link repo publik aktif Anda | `https://github.com/lixvn123/lixvn` |
 | **Stage / Funding** | Bootstrapped / Pre-Seed | `Bootstrapped / Early Stage Open-Source` |
 | **Primary Model Used** | Claude 3.5 Sonnet / Claude 3 Opus | `Claude 3.5 Sonnet (for reasoning & tool use), Claude 3.5 Haiku (for classification)` |
 | **Estimated Monthly Token Usage** | 50M - 200M tokens/month | `100,000,000 tokens/month` |
